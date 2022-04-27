@@ -27,6 +27,12 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    runtimeOnly 'org.aspectj:aspectjweaver'
+    runtimeOnly 'org.aspectj:aspectjrt'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+
 
 }
 

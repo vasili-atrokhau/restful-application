@@ -8,12 +8,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class EmployeeService {
 
     private final EmployeeRepository repository;
@@ -41,8 +41,6 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Long id) throws EmployeeException {
-        log.info("Start getEmployeeById() with id: " + id);
-
         Employee employee;
         Optional<Employee> employeeOptional = repository.findById(id);
 
@@ -51,8 +49,6 @@ public class EmployeeService {
         } else {
             throw new EmployeeException("Employee with id: " + id + " was not found");
         }
-
-        log.info("Finish getEmployeeById() with id: " + id);
 
         return employee;
     }

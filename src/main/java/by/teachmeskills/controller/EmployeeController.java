@@ -5,11 +5,11 @@ import by.teachmeskills.entity.EmployeeRequest;
 import by.teachmeskills.exception.EmployeeException;
 import by.teachmeskills.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,6 +25,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
+    @PreAuthorize("hasRole('ADMIN')")
     public Employee createEmployee(@RequestBody EmployeeRequest request) {
         return employeeService.createEmployee(request);
     }
@@ -40,6 +41,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
+    @PreAuthorize("hasAuthority('USER_READ')")
     public Employee getById(@PathVariable("id") Long id) throws EmployeeException {
         return employeeService.getEmployeeById(id);
     }
